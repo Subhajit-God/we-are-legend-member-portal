@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>WE ARE LEGEND — Message Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .page{max-width:600px;}
+  .nav-links{display:flex; justify-content:center; gap:16px; margin-bottom:8px; font-size:12px;}
+  .nav-links a{color:var(--gold-light); text-decoration:none;}
+  .nav-links a:hover{text-decoration:underline;}
+  .board-signin{display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;}
+  .board-signin input{flex:1; min-width:120px;}
+  .signed-in-bar{display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; font-size:12px; color:var(--paper-dim);}
+  .signed-in-bar strong{color:var(--gold-light);}
+  .thread-row{
+    background:var(--navy-2); border:1px solid var(--line); border-radius:var(--radius-sm);
+    padding:14px; margin-bottom:10px; cursor:pointer; transition:border-color .15s;
+  }
+  .thread-row:hover{border-color:var(--gold-dim);}
+  .thread-title{font-weight:600; color:var(--white); font-size:13.5px;}
+  .thread-meta{font-size:11px; color:var(--paper-dim); margin-top:3px;}
+  .thread-count{font-size:11px; color:var(--gold-light); white-space:nowrap;}
+  .post-row{padding:12px 0; border-bottom:1px solid var(--line-soft);}
+  .post-author{font-weight:600; color:var(--white); font-size:12.5px;}
+  .post-meta{font-size:10.5px; color:var(--paper-dim); margin-left:8px;}
+  .post-content{font-size:13px; color:var(--paper); margin-top:4px; white-space:pre-wrap;}
+  .reply-box{margin-top:16px;}
+  .reply-box textarea{width:100%; min-height:80px; background:var(--navy-2); border:1px solid var(--line); color:var(--paper); border-radius:var(--radius-sm); padding:10px 12px; font-size:13px; font-family:var(--font-body);}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <header class="crest">
+    <div class="crest-mark">⚜</div>
+    <div class="crest-title">WE ARE LEGEND</div>
+    <div class="crest-sub">Message Board</div>
+  </header>
+
+  <div class="nav-links">
+    <a href="index.html">👤 My Profile</a>
+  </div>
+
+  <main class="card">
+    <div id="boardSignin" class="board-signin">
+      <input type="text" id="bMemberId" placeholder="Member ID">
+      <input type="password" id="bPin" placeholder="PIN" inputmode="numeric">
+      <button class="btn" id="bSigninBtn">Sign In to Post</button>
+    </div>
+    <div id="boardSignedIn" class="signed-in-bar hidden">
+      Posting as <strong id="bSignedName"></strong>
+      <button class="btn ghost sm" id="bSignoutBtn" style="padding:4px 10px;">Sign out</button>
+    </div>
+    <div id="boardStatus" class="status-line"></div>
+
+    <div id="boardListView">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <div class="intro" style="margin:0; text-align:left;">Discussion for WE ARE LEGEND members.</div>
+        <button class="btn ghost sm hidden" id="bNewThreadBtn" style="padding:6px 12px; white-space:nowrap;">➕ New Thread</button>
+      </div>
+      <div id="threadList"></div>
+    </div>
+
+    <div id="boardThreadView" class="hidden">
+      <button class="btn ghost sm" id="bBackBtn" style="margin-bottom:14px;">← Back to threads</button>
+      <h2 id="threadTitle" style="font-size:17px;"></h2>
+      <div id="threadMeta" class="thread-meta" style="margin-bottom:14px;"></div>
+      <div id="postList"></div>
+      <div class="reply-box hidden" id="replyBox">
+        <textarea id="replyContent" placeholder="Write a reply…"></textarea>
+        <div style="margin-top:8px;"><button class="btn" id="bReplyBtn">Post Reply</button></div>
+      </div>
+      <div id="replyLockedNote" class="hint hidden" style="margin-top:10px;">Sign in above to reply.</div>
+    </div>
+
+    <div id="newThreadForm" class="hidden" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--line-soft);">
+      <div class="field" style="margin-bottom:10px;"><label style="display:block; font-size:11px; color:var(--paper-dim); margin-bottom:6px;">Title</label><input type="text" id="newThreadTitle" style="width:100%; background:var(--navy-2); border:1px solid var(--line); color:var(--paper); border-radius:6px; padding:9px 12px;"></div>
+      <div class="field"><label style="display:block; font-size:11px; color:var(--paper-dim); margin-bottom:6px;">Message</label><textarea id="newThreadContent" style="width:100%; min-height:90px; background:var(--navy-2); border:1px solid var(--line); color:var(--paper); border-radius:6px; padding:9px 12px; font-family:var(--font-body); font-size:13px;"></textarea></div>
+      <div style="margin-top:10px; display:flex; gap:8px;">
+        <button class="btn ghost" id="bCancelNewThread">Cancel</button>
+        <button class="btn" id="bPostThreadBtn">Post Thread</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="page-footer">
+    <div class="motto">&ldquo;Together in Happiness, Together in Difficulties, Legends Forever.&rdquo;</div>
+    <div class="sub-footer">Posts are reviewed under the same registry that manages your membership — keep it respectful.</div>
+  </footer>
+</div>
+
+<script src="config.js"></script>
+<script src="board.js"></script>
+</body>
+</html>

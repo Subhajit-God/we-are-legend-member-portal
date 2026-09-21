@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>WE ARE LEGEND — My Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page">
+
+  <header class="crest">
+    <div class="crest-mark">⚜</div>
+    <div class="crest-title">WE ARE LEGEND</div>
+    <div class="crest-sub">My Profile &middot; Self-Service Portal</div>
+  </header>
+
+  <div style="display:flex; justify-content:center; margin-bottom:18px;">
+    <a href="board.html" style="color:var(--gold-light); text-decoration:none; font-size:12px;">💬 Message Board</a>
+  </div>
+
+  <!-- ============ LOGIN STEP ============ -->
+  <main class="card" id="loginStep">
+    <div class="intro">Enter your Member ID and PIN to update your own contact details or photo. Changes are reviewed by a registry admin before they go live.</div>
+    <form id="loginForm">
+      <input type="text" id="memberIdInput" placeholder="Member ID — e.g. WAL-SD-S-A-1203-001" autocomplete="off" autocapitalize="characters" spellcheck="false" required>
+      <input type="password" id="pinInput" placeholder="PIN" inputmode="numeric" autocomplete="off" required>
+      <button type="submit" id="loginBtn">Continue</button>
+    </form>
+    <div id="loginStatus" class="status-line"></div>
+    <div class="hint">Don't have a PIN yet? Ask your registry admin to set one on your Member Profile.</div>
+  </main>
+
+  <!-- ============ EDIT STEP (hidden until logged in) ============ -->
+  <main class="card hidden" id="editStep">
+    <div class="edit-head">
+      <div>
+        <div class="edit-name" id="editName">—</div>
+        <div class="edit-sub">Editing your own contact info. Fields you don't touch aren't included in your submission.</div>
+      </div>
+      <button class="link-btn" id="logoutBtn">Sign out</button>
+    </div>
+
+    <div class="portal-tabs">
+      <button class="portal-tab active" data-tab="edit">✎ Edit Profile</button>
+      <button class="portal-tab" data-tab="activity">📊 My Activity</button>
+      <button class="portal-tab" data-tab="idcard">🪪 My ID Card</button>
+    </div>
+
+    <div class="portal-panel active" id="panel-edit">
+      <form id="editForm" class="edit-form">
+        <div class="field full" data-file-field="PhotoURL">
+          <label>Photo</label>
+          <div class="file-row">
+            <div class="photo-preview" id="photoPreview">—</div>
+            <div class="file-controls">
+              <input type="text" name="PhotoURL" id="photoUrlInput" placeholder="Photo URL" readonly>
+              <button type="button" class="btn ghost sm" id="photoUploadTrigger">📤 Upload Photo</button>
+              <input type="file" id="photoFileInput" accept="image/*" style="display:none;">
+            </div>
+          </div>
+          <div class="file-status" id="photoStatus"></div>
+        </div>
+
+        <div class="field"><label>Contact Number</label><input type="text" name="ContactNumber"></div>
+        <div class="field"><label>Email</label><input type="text" name="Email"></div>
+        <div class="field full"><label>Present Address</label><textarea name="Address"></textarea></div>
+        <div class="field"><label>School</label><input type="text" name="School"></div>
+        <div class="field"><label>Class</label><input type="text" name="Class"></div>
+        <div class="field"><label>Emergency Contact Name</label><input type="text" name="EmergencyContactName"></div>
+        <div class="field"><label>Emergency Contact Number</label><input type="text" name="EmergencyContactNumber"></div>
+
+        <div class="form-actions">
+          <button type="submit" id="submitBtn">Submit for Review</button>
+        </div>
+      </form>
+      <div id="editStatus" class="status-line"></div>
+    </div>
+
+    <div class="portal-panel" id="panel-activity">
+      <div id="activityStatus" class="status-line"></div>
+      <div id="activityContent"></div>
+    </div>
+
+    <div class="portal-panel" id="panel-idcard">
+      <div id="idcardStatus" class="status-line"></div>
+      <div class="id-card-wrap" id="idcardWrap" style="display:none;">
+        <button type="button" class="flip-btn" id="idcardFlipBtn">⟳ Flip Card</button>
+        <div class="id-card-scene">
+          <div class="id-card-flipper" id="idcardFlipper">
+            <div class="id-card-face id-card-front" id="idcardFront"></div>
+            <div class="id-card-face id-card-back" id="idcardBack"></div>
+          </div>
+        </div>
+        <div class="id-card-print-sheet" id="idcardPrintSheet"></div>
+        <div style="margin-top:16px;"><button type="button" class="btn" id="idcardPrintBtn">🖨️ Print Both Sides</button></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============ SUCCESS STEP ============ -->
+  <main class="card hidden" id="successStep">
+    <div class="success-icon">✓</div>
+    <div class="success-title">Submitted for review</div>
+    <div class="success-body">Your changes have been sent to a registry admin. They'll go live on your record once approved — you can check back any time by signing in again.</div>
+    <button class="btn ghost" id="backBtn">Back to My Profile</button>
+  </main>
+
+  <footer class="page-footer">
+    <div class="motto">&ldquo;Together in Happiness, Together in Difficulties, Legends Forever.&rdquo;</div>
+    <div class="sub-footer">Self-service changes are reviewed by an administrator before publishing — nothing you submit here changes your record immediately.</div>
+  </footer>
+
+</div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
